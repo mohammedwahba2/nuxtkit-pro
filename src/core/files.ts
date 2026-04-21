@@ -9,12 +9,24 @@ export interface MergeOptions {
   protectExistingCritical?: boolean
 }
 
-export async function ensureEmptyTarget(targetDir: string): Promise<void> {
-  if (await fs.pathExists(targetDir)) {
-    throw new CliError(`Target directory already exists: ${path.basename(targetDir)}`)
-  }
+export async function ensureTargetDirectory(targetDir: string): Promise<void> {
+  try {
+    if (!(await fs.pathExists(targetDir))) {
+      await fs.ensureDir(targetDir)
+      return
+    }
 
-  await fs.ensureDir(targetDir)
+    const entries = await fs.readdir(targetDir)
+
+    if (entries.length > 0) {
+      throw new CliError(
+        `Target directory "${path.basename(targetDir)}" already exists and is not empty.`,
+        'TARGET_NOT_EMPTY'
+      )
+    }
+  } catch (error) {
+    throw asCliError(error, `Unable to prepare target directory "${targetDir}".`)
+  }
 }
 
 export async function mergeFeature(
@@ -24,11 +36,24 @@ export async function mergeFeature(
 ): Promise<void> {
   const { overwrite = true, protectExistingCritical = true } = options
 
-  if (!(await fs.pathExists(sourceDir))) {
-    throw new CliError(`Missing scaffold source: ${sourceDir}`)
-  }
+  try {
+    if (!(await fs.pathExists(sourceDir))) {
+      throw new CliError(`Missing scaffold source: ${sourceDir}`, 'MISSING_SOURCE')
+    }
 
-  await copyDirectory(sourceDir, targetDir, targetDir, overwrite, protectExistingCritical)
+    await copyDirectory(
+      sourceDir,
+      targetDir,
+      targetDir,
+      overwrite,
+      protectExistingCritical
+    )
+  } catch (error) {
+    throw asCliError(
+      error,
+      `Unable to copy files from "${path.basename(sourceDir)}" into the project.`
+    )
+  }
 }
 
 async function copyDirectory(
@@ -47,7 +72,13 @@ async function copyDirectory(
 
     if (stat.isDirectory()) {
       await fs.ensureDir(targetPath)
-      await copyDirectory(sourcePath, targetPath, rootTargetDir, overwrite, protectExistingCritical)
+      await copyDirectory(
+        sourcePath,
+        targetPath,
+        rootTargetDir,
+        overwrite,
+        protectExistingCritical
+      )
       continue
     }
 
@@ -67,7 +98,10 @@ async function copyDirectory(
     }
 
     if (!overwrite && (await fs.pathExists(targetPath))) {
-      continue
+      throw new CliError(
+        `A file already exists at "${relativePath}". Re-run in an empty directory or remove the conflicting file.`,
+        'COPY_CONFLICT'
+      )
     }
 
     await fs.copy(sourcePath, targetPath, { overwrite })
@@ -86,4 +120,28 @@ function isCriticalPath(relativePath: string): boolean {
 
 function isEnvFile(relativePath: string): boolean {
   return relativePath === '.env' || relativePath.startsWith('.env.')
+}
+
+function asCliError(error: unknown, fallbackMessage: string): CliError {
+  if (error instanceof CliError) {
+    return error
+  }
+
+  if (
+    typeof error === 'object' &&
+    error !== null &&
+    'code' in error &&
+    (error as { code?: string }).code === 'EEXIST'
+  ) {
+    return new CliError(
+      'A file conflict was detected while copying the scaffold. Re-run in an empty directory.',
+      'COPY_CONFLICT'
+    )
+  }
+
+  if (error instanceof Error && error.message.trim()) {
+    return new CliError(`${fallbackMessage} ${error.message}`, 'FILE_OPERATION_FAILED')
+  }
+
+  return new CliError(fallbackMessage, 'FILE_OPERATION_FAILED')
 }

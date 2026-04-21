@@ -1,24 +1,48 @@
 {
   "name": "nuxtkit-pro",
   "version": "1.1.0",
-  "description": "Production-ready Nuxt 4 scaffolding CLI with templates and optional feature packs.",
+  "description": "A polished Nuxt 4 scaffolding CLI with starter templates and optional feature packs.",
   "type": "module",
   "bin": {
     "nuxtkit-pro": "dist/bin/index.js"
   },
   "files": [
     "dist",
-    "template"
+    "template",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "clean": "node --input-type=module -e \"import { rmSync } from 'node:fs'; rmSync('dist', { recursive: true, force: true })\"",
+    "clean": "node --input-type=module -e \"import { rmSync } from 'node:fs'; rmSync('dist', { recursive: true, force: true }); rmSync('test-app', { recursive: true, force: true })\"",
     "build": "npm run clean && tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
+    "validate:example": "node dist/bin/index.js test-app --template=dashboard --auth --api --tailwind --lint --no-install --no-git --yes",
     "prepublishOnly": "npm run build"
   },
   "engines": {
     "node": ">=18.18.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammedwahba2/nuxtkit-pro.git"
+  },
+  "homepage": "https://github.com/mohammedwahba2/nuxtkit-pro#readme",
+  "bugs": {
+    "url": "https://github.com/mohammedwahba2/nuxtkit-pro/issues"
+  },
+  "author": "Mohammed Wahba",
+  "license": "MIT",
+  "keywords": [
+    "nuxt",
+    "nuxt4",
+    "cli",
+    "scaffold",
+    "generator",
+    "starter",
+    "templates",
+    "tailwind",
+    "typescript"
+  ],
   "dependencies": {
     "fs-extra": "^11.2.0",
     "kolorist": "^1.8.0",
@@ -30,14 +54,5 @@
     "@types/node": "^20.0.0",
     "@types/prompts": "^2.4.9",
     "typescript": "^5.0.0"
-  },
-  "keywords": [
-    "nuxt",
-    "cli",
-    "scaffold",
-    "generator",
-    "nuxt4",
-    "starter"
-  ],
-  "license": "MIT"
+  }
 }

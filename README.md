@@ -1,12 +1,21 @@
 # NuxtKit Pro
 
-Nuxt 4 scaffolding for apps you can run on the first commit.
+NuxtKit Pro is a Nuxt 4 scaffolding CLI for developers who want a solid starting point without spending the first hour wiring the same pieces together again.
 
-NuxtKit Pro creates real Nuxt 4 projects with starter templates, optional feature packs, and clean defaults for everyday development.
+It generates clean Nuxt projects from curated templates, lets you layer in common feature packs, and keeps the command-line experience fast, predictable, and easy to automate.
 
-## Install
+## Features
 
-Run it directly:
+- Nuxt 4 starter generation with multiple templates
+- Optional feature packs for auth, API routes, Tailwind CSS, and linting
+- Interactive mode for guided setup
+- Non-interactive mode for automation and CI
+- Safe template fallback and defensive file handling
+- Dependency installation and git initialization built in
+
+## Installation
+
+Run it directly with `npx`:
 
 ```bash
 npx nuxtkit-pro@latest my-app
@@ -19,106 +28,124 @@ npm install -g nuxtkit-pro
 nuxtkit-pro my-app
 ```
 
-## Quick Start
-
-```bash
-npx nuxtkit-pro@latest my-app
-cd my-app
-npm install
-npm run dev
-```
-
 ## Usage
 
 ```bash
 nuxtkit-pro <project-name> [options]
 ```
 
-### Examples
+### Quick examples
+
+Create a standard Nuxt app:
 
 ```bash
-npx nuxtkit-pro@latest my-app
-npx nuxtkit-pro@latest admin-panel --template=dashboard --auth --api
-npx nuxtkit-pro@latest marketing-site --template=landing --tailwind
-npx nuxtkit-pro@latest saas-starter --template=saas --auth --api --tailwind --lint
-npx nuxtkit-pro@latest internal-tool --template=dashboard --package-manager=pnpm
+nuxtkit-pro my-app
 ```
 
-## Features
-
-- `--auth` adds a real login flow, route middleware, a protected account page, and a mock auth endpoint.
-- `--api` adds a working Nitro endpoint, service layer, composable, and demo page.
-- `--tailwind` wires in `@nuxtjs/tailwindcss` with config and CSS entry files.
-- `--lint` adds ESLint, Prettier, Husky, and lint-staged.
-
-## Templates Preview
-
-- `default` for general-purpose Nuxt apps
-- `dashboard` for admin panels and internal tools
-- `landing` for marketing sites and launch pages
-- `saas` for product-first SaaS home pages
-
-## CLI Flags
-
-- `--template=<default|dashboard|landing|saas>`
-- `--auth`
-- `--api`
-- `--tailwind`
-- `--lint`
-- `--package-manager=<npm|pnpm|yarn|bun>`
-- `--no-install`
-- `--no-git`
-- `--yes`
-
-## Example
-
-Generate a dashboard app with auth, API routes, Tailwind, and linting:
+Scaffold a dashboard with auth and API support:
 
 ```bash
-npx nuxtkit-pro@latest ops-console \
+nuxtkit-pro admin-panel --template=dashboard --auth --api
+```
+
+Create a landing page starter without installing dependencies:
+
+```bash
+nuxtkit-pro marketing-site --template=landing --tailwind --no-install
+```
+
+Run in non-interactive mode:
+
+```bash
+nuxtkit-pro saas-starter \
+  --template=saas \
+  --auth \
+  --api \
+  --tailwind \
+  --lint \
+  --package-manager=pnpm \
+  --no-git \
+  --yes
+```
+
+## Templates
+
+### `default`
+
+The general-purpose starting point. Good for most apps when you want a clean Nuxt base and no opinionated layout.
+
+### `dashboard`
+
+Focused on internal tools, admin panels, and products that need a structured application shell from day one.
+
+### `landing`
+
+Built for marketing pages, launches, and brand-forward sites that need a lightweight, content-driven starting point.
+
+### `saas`
+
+A SaaS-oriented starter aimed at product marketing pages and product-first websites.
+
+## Feature Packs
+
+### `--auth`
+
+Adds a basic authentication flow with composables, middleware, login handling, and starter account pages.
+
+### `--api`
+
+Adds a simple Nitro API example, client-side utilities, and a demo page for data fetching patterns.
+
+### `--tailwind`
+
+Adds Tailwind CSS configuration, PostCSS setup, and a CSS entry file wired into Nuxt.
+
+### `--lint`
+
+Adds ESLint, Prettier, Husky, and lint-staged so the project starts with a maintainable code quality baseline.
+
+## CLI Options
+
+| Option | Description |
+| --- | --- |
+| `--template <name>` | Choose a template: `default`, `dashboard`, `landing`, `saas` |
+| `--auth` | Include the authentication feature pack |
+| `--api` | Include the API feature pack |
+| `--tailwind` | Include the Tailwind CSS feature pack |
+| `--lint` | Include the linting feature pack |
+| `--package-manager <name>` | Choose `npm`, `pnpm`, or `yarn` |
+| `--yes` | Skip prompts and use defaults for any missing values |
+| `--no-install` | Do not run dependency installation after scaffolding |
+| `--no-git` | Do not initialize a git repository |
+| `-h, --help` | Show the help output |
+
+## Example Workflow
+
+```bash
+nuxtkit-pro test-app \
   --template=dashboard \
   --auth \
   --api \
   --tailwind \
-  --lint
+  --lint \
+  --no-install \
+  --no-git \
+  --yes
+```
 
-cd ops-console
+Then:
+
+```bash
+cd test-app
 npm install
 npm run dev
 ```
 
-## Example Output
+## Contributing
 
-```text
-NuxtKit Pro v1.0.0
-Nuxt 4 project scaffolder
+Contributions are welcome. If you want to improve templates, add a new feature pack, or tighten the CLI experience, open an issue or submit a pull request.
 
-✔ Created ops-console using the dashboard template
-› Applying auth feature
-› Applying API feature
-› Applying Tailwind feature
-› Applying linting feature
-√ Project ready
-
-Template:
-  dashboard
-
-Features:
-  auth, api, tailwind, lint
-
-Next steps:
-  cd ops-console
-  npm install
-  npm run dev
-```
-
-## Why Use It
-
-- Starts from a working Nuxt 4 app, not an empty shell
-- Keeps templates and features modular
-- Merges scaffolds safely without clobbering critical files
-- Produces apps you can run immediately
-- Keeps the generated structure simple enough to own
+If you plan to make a larger change, it helps to start with a short discussion so the direction stays aligned with the project.
 
 ## License
 

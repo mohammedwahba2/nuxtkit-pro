@@ -18,12 +18,7 @@ export const AVAILABLE_FEATURES = [
   'lint'
 ] as const
 
-export const AVAILABLE_PACKAGE_MANAGERS = [
-  'npm',
-  'pnpm',
-  'yarn',
-  'bun'
-] as const
+export const AVAILABLE_PACKAGE_MANAGERS = ['npm', 'pnpm', 'yarn'] as const
 
 export type TemplateName = (typeof AVAILABLE_TEMPLATES)[number]
 export type FeatureName = (typeof AVAILABLE_FEATURES)[number]
@@ -47,9 +42,7 @@ export const CRITICAL_PATHS = new Set([
   '.yarnrc.yml',
   'package-lock.json',
   'pnpm-lock.yaml',
-  'yarn.lock',
-  'bun.lock',
-  'bun.lockb'
+  'yarn.lock'
 ])
 
 function readVersion(): string {

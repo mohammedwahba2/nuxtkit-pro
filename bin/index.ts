@@ -2,4 +2,8 @@
 
 import { main } from '../src/cli.js'
 
-await main()
+try {
+  await main()
+} catch {
+  process.exitCode = 1
+}

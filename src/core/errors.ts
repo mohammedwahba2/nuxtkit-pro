@@ -13,9 +13,9 @@ export function formatError(error: unknown): string {
     return error.message
   }
 
-  if (error instanceof Error) {
-    return error.message
+  if (error instanceof Error && error.message.trim()) {
+    return `Unexpected error: ${error.message}`
   }
 
-  return 'Unexpected error'
+  return 'Unexpected error. Please try again or open an issue if the problem persists.'
 }
