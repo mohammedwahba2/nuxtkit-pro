@@ -1,5 +1,5 @@
 {
-  "name": "template",
+  "name": "nuxtkit-app",
   "type": "module",
   "private": true,
   "scripts": {
@@ -10,8 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "nuxt": "^4.4.2",
-    "vue": "^3.5.32",
-    "vue-router": "^5.0.4"
+    "nuxt": "^4.4.2"
   }
 }

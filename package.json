@@ -1,12 +1,23 @@
 {
   "name": "nuxtkit-pro",
-  "version": "0.0.2",
+  "version": "1.0.0",
+  "description": "Production-ready Nuxt 4 scaffolding CLI with templates and optional feature packs.",
   "type": "module",
   "bin": {
-    "nuxtkit-pro": "dist/index.js"
+    "nuxtkit-pro": "dist/bin/index.js"
   },
+  "files": [
+    "dist",
+    "template"
+  ],
   "scripts": {
-    "build": "tsc"
+    "clean": "node --input-type=module -e \"import { rmSync } from 'node:fs'; rmSync('dist', { recursive: true, force: true })\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18.18.0"
   },
   "dependencies": {
     "fs-extra": "^11.2.0",
@@ -19,5 +30,14 @@
     "@types/node": "^20.0.0",
     "@types/prompts": "^2.4.9",
     "typescript": "^5.0.0"
-  }
+  },
+  "keywords": [
+    "nuxt",
+    "cli",
+    "scaffold",
+    "generator",
+    "nuxt4",
+    "starter"
+  ],
+  "license": "MIT"
 }

@@ -1,42 +1,76 @@
-<script setup>
-const { isAuthenticated, logout, user } = useAuth()
-</script>
-
 <template>
-  <div>
-    <!-- 🔥 Navbar -->
-    <nav class="flex items-center justify-between p-4 border-b bg-white">
-      <h1 class="text-xl font-bold">Nuxt Starter 🚀</h1>
+  <div class="layout-shell">
+    <header class="page-shell topbar">
+      <NuxtLink class="brand-mark" to="/">
+        <span class="brand-badge">N</span>
+        <span>NuxtKit Pro</span>
+      </NuxtLink>
 
-      <div class="flex gap-4 items-center">
-        <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
-        <NuxtLink to="/users">Users</NuxtLink>
-        <NuxtLink
-          v-if="!isAuthenticated"
-          to="/login"
-          class="hover:underline"
-        >
-          Login
-        </NuxtLink>
+      <nav class="nav-links">
+        <NuxtLink to="/">Home</NuxtLink>
+        <NuxtLink to="/account">Account</NuxtLink>
+        <NuxtLink to="/api-demo">API Demo</NuxtLink>
+      </nav>
+    </header>
 
-        <div v-else class="flex items-center gap-3">
-          <span class="text-sm text-gray-600">
-            Hi, {{ user?.name }}
-          </span>
-
-          <button
-            class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
-            @click="logout"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <!-- 🔥 Page Content -->
-    <main class="p-6">
+    <main class="page-shell content-shell">
       <slot />
     </main>
   </div>
 </template>
+
+<style scoped>
+.layout-shell {
+  min-height: 100vh;
+  padding: 1rem 0 2rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.brand-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.85rem;
+  background: #0f172a;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--muted);
+}
+
+.content-shell {
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+  }
+}
+</style>
