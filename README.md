@@ -1,149 +1,95 @@
-# 🚀 NuxtKit Pro
+# NuxtKit Pro 🚀
 
-> Powerful CLI to scaffold scalable Nuxt 4 apps with templates & features
-
----
-
-## ✨ Features
-
-* 🧱 Multiple templates
-
-  * Default
-  * Dashboard
-  * SaaS
-  * Landing
-
-* 🧩 Modular features
-
-  * 🔐 Auth
-  * 🌍 API Layer
-  * 🎨 Tailwind CSS
-  * 🧹 Linting (ESLint + Prettier + Husky)
-
-* ⚡ Fast project generation
-
-* 📦 Auto install dependencies
-
-* 🧬 Git initialized automatically
-
-* 🧠 Interactive CLI mode
+Scaffold Nuxt 4 apps in seconds with a clean structure, ready-to-use templates, and optional features.
 
 ---
 
-## 📦 Installation
+## ✨ What is this?
 
-```bash
-npm install -g nuxtkit-pro
-```
+NuxtKit Pro is a CLI tool that helps you start Nuxt projects faster without wasting time on setup.
 
-or use without install:
+Instead of configuring everything from scratch, you get a working app with a solid structure out of the box.
+
+---
+
+## ⚡ Quick Start
 
 ```bash
 npx nuxtkit-pro my-app
+cd my-app
+npm run dev
 ```
 
 ---
 
-## 🚀 Usage
+## 🧩 Features
 
-### Basic
-
-```bash
-nuxtkit-pro my-app
-```
-
-### With template
-
-```bash
-nuxtkit-pro my-app --template=dashboard
-```
-
-### With features
-
-```bash
-nuxtkit-pro my-app --auth --tailwind --api --lint
-```
+* 📦 Pre-built templates (default, dashboard, landing, saas)
+* 🔐 Auth ready (basic flow + middleware)
+* 🌍 API layer structure
+* 🎨 Tailwind CSS setup (optional)
+* 🧹 ESLint + Prettier (optional)
+* 🧬 Git initialized automatically
 
 ---
 
-## 🧠 Interactive Mode
+## 🛠 Usage
 
-Just run:
+### Create project with flags
 
 ```bash
-nuxtkit-pro
+npx nuxtkit-pro my-app --auth --tailwind
 ```
 
-And choose:
+### Use specific template
 
-* Project name
-* Template
-* Features
+```bash
+npx nuxtkit-pro my-app --template=dashboard
+```
 
 ---
 
 ## 📁 Project Structure
 
 ```
-template/
-  templates/
-    default/
-    dashboard/
-    landing/
-    saas/
-  features/
-    auth/
-    api/
+app/
+  components/
+  pages/
+  layouts/
+  composables/
+
+server/
+  api/
+
+services/
 ```
 
 ---
 
-## 🎯 Example
+## 🧠 Why?
 
-```bash
-nuxtkit-pro my-saas --template=saas --auth --tailwind --api
-```
+Most starters are either:
 
----
+* too minimal
+* or too bloated
 
-## ⚙️ Requirements
-
-* Node.js 18+
-* npm / pnpm
+This one tries to stay in the middle:
+clean, scalable, and easy to extend.
 
 ---
 
-## 🛠️ Development
+## 📌 Roadmap
 
-```bash
-git clone https://github.com/your-username/nuxtkit-pro
-cd nuxtkit-pro
-pnpm install
-pnpm build
-```
+* [ ] More templates
+* [ ] Better auth integrations
+* [ ] UI components library
+* [ ] Plugin system
 
 ---
 
-## 📦 Publish
+## 🤝 Contributing
 
-```bash
-npm publish
-```
-
----
-
-## 💡 Why NuxtKit Pro?
-
-Because starting a Nuxt project shouldn't take hours.
-
----
-
-## ⭐ Support
-
-If you like this project:
-
-* Give it a ⭐ on GitHub
-* Share it with others
+PRs are welcome. If you have ideas or improvements, feel free to open an issue.
 
 ---
 
