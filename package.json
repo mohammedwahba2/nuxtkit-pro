@@ -1,6 +1,6 @@
 {
   "name": "nuxtkit-pro",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Production-ready Nuxt 4 scaffolding CLI with templates and optional feature packs.",
   "type": "module",
   "bin": {
