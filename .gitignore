@@ -1,0 +1,52 @@
+# Node
+
+node_modules
+.pnpm
+.pnpm-store
+
+# Build
+
+dist
+.output
+.nuxt
+
+# Logs
+
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+
+.DS_Store
+Thumbs.db
+
+# Env
+
+.env
+.env.*
+!.env.example
+
+# IDE
+
+.vscode
+.idea
+
+# TypeScript
+
+*.tsbuildinfo
+
+# Temp
+
+.tmp
+.temp
+
+# Coverage
+
+coverage
+
+
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
